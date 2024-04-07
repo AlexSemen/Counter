@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Counter : MonoBehaviour
 {
-    [SerializeField] TMP_Text _textMeshPro;
+    [SerializeField] private TMP_Text _textMeshPro;
 
     private float _timeScore = 0.5f;
     private WaitForSeconds _waitForSeconds;
@@ -26,13 +26,10 @@ public class Counter : MonoBehaviour
         while (_isWork) 
         {
             yield return _waitForSeconds;
+            
             _curretScore++;
             Debug.Log(_curretScore.ToString());
-            
-            if (_textMeshPro != null)
-            {
-                _textMeshPro.text = _curretScore.ToString();
-            }
+            _textMeshPro.text = _curretScore.ToString();
         }
     }
 

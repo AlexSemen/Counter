@@ -13,7 +13,6 @@ public class Counter : MonoBehaviour
     private int _curretScore;
     private Coroutine _coroutine;
 
-
     private void Awake()
     {
         _waitForSeconds = new WaitForSeconds(_timeScore);
@@ -21,7 +20,7 @@ public class Counter : MonoBehaviour
         _curretScore = 0;
     }
 
-    IEnumerator Score()
+    private IEnumerator KeepScore()
     {
         while (_isWork) 
         {
@@ -50,7 +49,7 @@ public class Counter : MonoBehaviour
 
     private void TurnOnScore()
     {
-        _coroutine = StartCoroutine(Score());
+        _coroutine = StartCoroutine(KeepScore());
     }
 
     private void OffScore()

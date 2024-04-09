@@ -20,44 +20,31 @@ public class Counter : MonoBehaviour
         _curretScore = 0;
     }
 
-    private IEnumerator KeepScore()
-    {
-        while (_isWork) 
-        {
-            yield return _waitForSeconds;
-            
-            _curretScore++;
-            Debug.Log(_curretScore.ToString());
-            _textMeshPro.text = _curretScore.ToString();
-        }
-    }
-
     private void Update()
     {
         if(Input.GetKeyUp(KeyCode.Space))
         {
             if (_coroutine == null)
             {
-                TurnOnScore();
+                _coroutine = StartCoroutine(KeepScore());
             }
             else
             {
-                OffScore();
+                StopCoroutine(_coroutine);
+                _coroutine = null;
             }
         }
     }
 
-    private void TurnOnScore()
+    private IEnumerator KeepScore()
     {
-        _coroutine = StartCoroutine(KeepScore());
-    }
-
-    private void OffScore()
-    {
-        if(_coroutine != null)
+        while (_isWork)
         {
-            StopCoroutine(_coroutine);
-            _coroutine = null;
+            yield return _waitForSeconds;
+
+            _curretScore++;
+            Debug.Log(_curretScore.ToString());
+            _textMeshPro.text = _curretScore.ToString();
         }
     }
 }
